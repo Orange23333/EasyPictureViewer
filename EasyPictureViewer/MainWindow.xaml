@@ -12,8 +12,9 @@
             <RowDefinition Height="24"/>
             <RowDefinition Height="32"/>
         </Grid.RowDefinitions>
-        <Canvas x:Name="canvas" Grid.Row="0" MouseLeftButtonDown="canvas_MouseLeftButtonDown" >
-            <Image x:Name="image" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Hidden">
+        <Image x:Name="background" Grid.Row="0" />
+        <Canvas x:Name="canvas" Grid.Row="0" MouseLeftButtonDown="canvas_MouseLeftButtonDown" SizeChanged="canvas_SizeChanged" >
+            <Image x:Name="image" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Visibility="Hidden">
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform x:Name="imageScaleTransform" CenterX="0" CenterY="0" ScaleX="1" ScaleY="1"/>
@@ -36,7 +37,7 @@
                 <ColumnDefinition Width="24"/>
                 <ColumnDefinition Width="*" MinWidth="2"/>
             </Grid.ColumnDefinitions>
-            <Grid x:Name="zoomGrid" Grid.Column="0">
+            <Grid x:Name="scalingGrid" Grid.Column="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2"/>
                     <ColumnDefinition Width="65"/>
@@ -44,9 +45,9 @@
                     <ColumnDefinition Width="17"/>
                     <ColumnDefinition Width="2"/>
                 </Grid.ColumnDefinitions>
-                <Label x:Name="zoomLabel1" Content="Scaling" Grid.Column="1" FontSize="18" FontWeight="Bold" Padding="0,0,0,0"/>
-                <TextBox x:Name="zoomTextBox" Text="100" HorizontalContentAlignment="Right" Grid.Column="2" FontSize="18" FontWeight="Bold" Padding="0,0,0,0" TextChanged="zoomTextBox_TextChanged"/>
-                <Label x:Name="zoomLabel2" Content="%" Grid.Column="3" FontSize="18" FontWeight="Bold" Padding="0,0,0,0"/>
+                <Label x:Name="scalingLabel1" Content="Scaling" Grid.Column="1" FontSize="18" FontWeight="Bold" Padding="0,0,0,0"/>
+                <TextBox x:Name="scalingTextBox" Text="100" HorizontalContentAlignment="Right" Grid.Column="2" FontSize="18" FontWeight="Bold" Padding="0,0,0,0" TextChanged="scalingTextBox_TextChanged" MouseWheel="scalingTextBox_MouseWheel"/>
+                <Label x:Name="scalingLabel2" Content="%" Grid.Column="3" FontSize="18" FontWeight="Bold" Padding="0,0,0,0"/>
             </Grid>
             <Button x:Name="leftButton" Grid.Column="1" Click="leftButton_Click">
                 <Label x:Name="leftButtonLabel" Content="&lt;" FontSize="26" FontWeight="Bold" Padding="0,0,0,0" Margin="0,-8,0,0"/>
