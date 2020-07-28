@@ -4,10 +4,23 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
+    <StartupObject></StartupObject>
+    <ApplicationIcon>EasyPictureViewer.ico</ApplicationIcon>
+    <Authors>Orange233</Authors>
+    <Company>Bisitsoft Stdudio</Company>
+    <Description>Official website: https://www.ourorangenet.com .</Description>
+    <Copyright>Copyright © Bisitsoft 2020</Copyright>
+    <PackageProjectUrl>https://www.ourorangenet.com/software/EasyPictureViewer</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Blob\ValueConverters\" />
+    <None Remove="EasyPictureViewer.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="EasyPictureViewer.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

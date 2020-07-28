@@ -5,17 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EasyPictureViewer"
         mc:Ignorable="d"
-        Title="EasyPictureViewer" Height="256" Width="256" Icon="/EasyPictureViewer.ico" MinHeight="64" MinWidth="256">
+        Title="EasyPictureViewer" Height="256" Width="272" MinHeight="64" MinWidth="272" Loaded="Window_Loaded" >
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="24"/>
-            <RowDefinition Height="24"/>
+            <RowDefinition Height="32"/>
         </Grid.RowDefinitions>
-        <Canvas x:Name="canvas" Grid.Row="0">
-            <Image x:Name="image" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Hidden"/>
+        <Canvas x:Name="canvas" Grid.Row="0" MouseLeftButtonDown="canvas_MouseLeftButtonDown" >
+            <Image x:Name="image" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Hidden">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform x:Name="imageScaleTransform" CenterX="0" CenterY="0" ScaleX="1" ScaleY="1"/>
+                        <SkewTransform/>
+                        <RotateTransform x:Name="imageRotateTransform" Angle="0"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
         </Canvas>
-        <Grid x:Name="toolGrid" Grid.Row="1">
+        <Grid x:Name="toolGrid" Grid.Row="1" Background="#7FFF8000">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="152"/>
                 <ColumnDefinition Width="24"/>
@@ -30,37 +39,35 @@
             <Grid x:Name="zoomGrid" Grid.Column="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2"/>
-                    <ColumnDefinition Width="54"/>
-                    <ColumnDefinition Width="76"/>
-                    <ColumnDefinition Width="18"/>
+                    <ColumnDefinition Width="65"/>
+                    <ColumnDefinition Width="66"/>
+                    <ColumnDefinition Width="17"/>
                     <ColumnDefinition Width="2"/>
                 </Grid.ColumnDefinitions>
-                <Label x:Name="zoomLabel1" Content="Zoom" Grid.Column="1" FontSize="18" FontWeight="Bold" Padding="0,0,0,0"/>
-                <TextBox x:Name="zoomTextBox" Text="100" HorizontalContentAlignment="Right" Grid.Column="2" FontSize="18" FontWeight="Bold" Padding="0,0,0,0"/>
+                <Label x:Name="zoomLabel1" Content="Scaling" Grid.Column="1" FontSize="18" FontWeight="Bold" Padding="0,0,0,0"/>
+                <TextBox x:Name="zoomTextBox" Text="100" HorizontalContentAlignment="Right" Grid.Column="2" FontSize="18" FontWeight="Bold" Padding="0,0,0,0" TextChanged="zoomTextBox_TextChanged"/>
                 <Label x:Name="zoomLabel2" Content="%" Grid.Column="3" FontSize="18" FontWeight="Bold" Padding="0,0,0,0"/>
             </Grid>
-            <Button x:Name="leftButton" Grid.Column="1">
+            <Button x:Name="leftButton" Grid.Column="1" Click="leftButton_Click">
                 <Label x:Name="leftButtonLabel" Content="&lt;" FontSize="26" FontWeight="Bold" Padding="0,0,0,0" Margin="0,-8,0,0"/>
             </Button>
-            <Button x:Name="contrarotateButton" Grid.Column="3">
+            <Button x:Name="contrarotateButton" Grid.Column="3" Click="contrarotateButton_Click">
                 <Label x:Name="contrarotateButtonLabel" Content="&#10226;" FontSize="26" FontWeight="Bold" Padding="0,0,0,0" Margin="0,-8,0,0"/>
             </Button>
-            <Button x:Name="clockwiseRotationButton" Grid.Column="5">
+            <Button x:Name="clockwiseRotationButton" Grid.Column="5" Click="clockwiseRotationButton_Click">
                 <Label x:Name="clockwiseRotationButtonLabel" Content="&#10227;" FontSize="26" FontWeight="Bold" Padding="0,0,0,0" Margin="0,-8,0,0"/>
             </Button>
-            <Button x:Name="rightButton" Grid.Column="7">
+            <Button x:Name="rightButton" Grid.Column="7" Click="rightButton_Click">
                 <Label x:Name="rightButtonLabel" Content="&gt;" FontSize="26" FontWeight="Bold" Padding="0,0,0,0" Margin="0,-8,0,0"/>
             </Button>
         </Grid>
         <StatusBar x:Name="statusBar" Grid.Row="2">
-            <StatusBarItem x:Name="statusBarItem" Padding="3,3,3,3">
-                <Grid x:Name="statusGrid" Width="250">
+            <StatusBarItem x:Name="statusBarItem" Padding="3,3,3,3" SizeChanged="statusBarItem_SizeChanged">
+                <Grid x:Name="statusGrid">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <ComboBox x:Name="filesComboBox" Grid.Column="0"/>
-                    <Label x:Name="fileNameLabel" Grid.Column="1"/>
+                    <ComboBox x:Name="filesComboBox" Grid.Column="0" SelectionChanged="filesComboBox_SelectionChanged"/>
                 </Grid>
             </StatusBarItem>
         </StatusBar>
