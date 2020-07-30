@@ -7,6 +7,7 @@ namespace EasyPictureViewer
     public static class SupportImageFiles
     {
         private static Dictionary<string, List<string>> extensions = new Dictionary<string, List<string>>();
+        private static Dictionary<string, string> icons = new Dictionary<string, string>();
 
         private static bool initialised = false;
         public static void Init()
@@ -23,8 +24,37 @@ namespace EasyPictureViewer
                 extensions.Add("Icon file", new List<string>(new string[] { "ico" }));
                 extensions.Add("Windows Media Photo file", new List<string>(new string[] { "wdp" }));
 
+                //icons.Add("", "00_EmptyFile.ico");
+                icons.Add(".bmp", "01_BMP.ico");
+                icons.Add(".dib", "02_DIB.ico");
+                icons.Add(".jpg", "03_JPG.ico");
+                icons.Add(".jpeg", "04_JPEG.ico");
+                icons.Add(".jpe", "05_JPE.ico");
+                icons.Add(".jfif", "06_JFIF.ico");
+                icons.Add(".gif", "07_GIF.ico");
+                icons.Add(".tif", "08_TIF.ico");
+                icons.Add(".tiff", "09_TIFF.ico");
+                icons.Add(".png", "10_PNG.ico");
+                icons.Add(".ico", "11_ICO.ico");
+                icons.Add(".wdp", "12_WDP.ico");
+                //icons.Add(".webp", "13_WEBP.ico");
+                //icons.Add("", "14_UnknownType.ico");
+
                 initialised = true;
             }
+        }
+
+        public static Dictionary<string, string> GetFileIconNames()
+        {
+            Init();
+
+            Dictionary<string, string> copy = new Dictionary<string, string>();
+            foreach(var one in icons)
+            {
+                copy.Add(one.Key, one.Value);
+            }
+
+            return copy;
         }
 
         public static string GetFilter()
@@ -87,7 +117,7 @@ namespace EasyPictureViewer
             {
                 if (hasPoint)
                 {
-                    temp = "(^.";
+                    temp = "(^\\.";
                 }
                 else
                 {
@@ -98,7 +128,7 @@ namespace EasyPictureViewer
             {
                 if (hasPoint)
                 {
-                    temp = "(*.";
+                    temp = "(*\\.";
                 }
                 else
                 {

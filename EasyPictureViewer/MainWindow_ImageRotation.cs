@@ -20,7 +20,12 @@ namespace EasyPictureViewer
 {
     public partial class MainWindow : Window
     {
-        private double rotationAngle = 0;
+        //private double rotationAngle = 0;
+
+        public void SetRotationAngle(double value)
+        {
+
+        }
 
         private void contrarotateButton_Click(object sender, RoutedEventArgs e)
         {

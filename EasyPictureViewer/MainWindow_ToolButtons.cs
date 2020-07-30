@@ -20,6 +20,8 @@ namespace EasyPictureViewer
 {
     public partial class MainWindow : Window
     {
+        private int moveSourceIndex = -1;
+
         private void leftButton_Click(object sender, RoutedEventArgs e)
         {
             if (--nowIndex < 0)
@@ -29,8 +31,27 @@ namespace EasyPictureViewer
 
             string prevFile = imageFiles[nowIndex];
 
-            SetImage(prevFile);
-            filesComboBox.SelectedItem = prevFile;
+            if((new FileInfo(System.IO.Path.Combine(nowDirectory, prevFile).Replace('\\', '/'))).Exists)
+            {
+                moveSourceIndex = -1;
+
+                SetImage(prevFile);
+                needNotRefreshFilesComboBox = true;
+                filesComboBox.SelectedItem = prevFile;
+            }
+            else
+            {
+                if (moveSourceIndex != -1)
+                {
+                    moveSourceIndex = nowIndex;
+                }
+                else if(moveSourceIndex == nowIndex)
+                {
+                    MessageBox.Show("Error: No image file in this directory.", "EasyPictureViewer: Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    Environment.Exit(-1);
+                }
+                leftButton_Click(sender, e);
+            }
         }
 
         private void rightButton_Click(object sender, RoutedEventArgs e)
@@ -49,8 +70,27 @@ namespace EasyPictureViewer
 
             string nextFile = imageFiles[nowIndex];
 
-            SetImage(nextFile);
-            filesComboBox.SelectedItem = nextFile;
+            if ((new FileInfo(System.IO.Path.Combine(nowDirectory, nextFile).Replace('\\', '/'))).Exists)
+            {
+                moveSourceIndex = -1;
+
+                SetImage(nextFile);
+                needNotRefreshFilesComboBox = true;
+                filesComboBox.SelectedItem = nextFile;
+            }
+            else
+            {
+                if (moveSourceIndex != -1)
+                {
+                    moveSourceIndex = nowIndex;
+                }
+                else if (moveSourceIndex == nowIndex)
+                {
+                    MessageBox.Show("Error: No image file in this directory.", "EasyPictureViewer: Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    Environment.Exit(-1);
+                }
+                rightButton_Click(sender, e);
+            }
         }
     }
 }

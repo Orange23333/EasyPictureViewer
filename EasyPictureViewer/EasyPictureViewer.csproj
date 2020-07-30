@@ -5,13 +5,18 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
     <StartupObject></StartupObject>
-    <ApplicationIcon>EasyPictureViewer.ico</ApplicationIcon>
+    <ApplicationIcon></ApplicationIcon>
     <Authors>Orange233</Authors>
     <Company>Bisitsoft Stdudio</Company>
     <Description>Official website: https://www.ourorangenet.com .</Description>
     <Copyright>Copyright © Bisitsoft 2020</Copyright>
     <PackageProjectUrl>https://www.ourorangenet.com/software/EasyPictureViewer</PackageProjectUrl>
+    <Win32Resource>D:\Work\Project\Software\EasyPictureViewer\#Texture\Resources.rct</Win32Resource>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="FileIcons\【生成操作无】RegisterIcons.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <None Remove="EasyPictureViewer.ico" />
@@ -30,25 +35,11 @@
     <None Remove="FileIcons\11_ICO.ico" />
     <None Remove="FileIcons\12_WDP.ico" />
     <None Remove="FileIcons\13_WEBP.ico" />
-    <None Remove="FileIcons\14_UnknowType.ico" />
+    <None Remove="FileIcons\14_UnknownType.ico" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="FileIcons\00_EmptyFile.ico" />
-    <EmbeddedResource Include="FileIcons\01_BMP.ico" />
-    <EmbeddedResource Include="FileIcons\02_DIB.ico" />
-    <EmbeddedResource Include="FileIcons\03_JPG.ico" />
-    <EmbeddedResource Include="FileIcons\04_JPEG.ico" />
-    <EmbeddedResource Include="FileIcons\05_JPE.ico" />
-    <EmbeddedResource Include="FileIcons\06_JFIF.ico" />
-    <EmbeddedResource Include="FileIcons\07_GIF.ico" />
-    <EmbeddedResource Include="FileIcons\08_TIF.ico" />
-    <EmbeddedResource Include="FileIcons\09_TIFF.ico" />
-    <EmbeddedResource Include="FileIcons\10_PNG.ico" />
-    <EmbeddedResource Include="FileIcons\11_ICO.ico" />
-    <EmbeddedResource Include="FileIcons\12_WDP.ico" />
-    <EmbeddedResource Include="FileIcons\13_WEBP.ico" />
-    <EmbeddedResource Include="FileIcons\14_UnknowType.ico" />
+    <None Include="FileIcons\【生成操作无】RegisterIcons.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -58,6 +49,21 @@
     <Resource Include="EasyPictureViewerBackground.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="FileIcons\00_EmptyFile.ico" />
+    <Resource Include="FileIcons\01_BMP.ico" />
+    <Resource Include="FileIcons\02_DIB.ico" />
+    <Resource Include="FileIcons\03_JPG.ico" />
+    <Resource Include="FileIcons\04_JPEG.ico" />
+    <Resource Include="FileIcons\05_JPE.ico" />
+    <Resource Include="FileIcons\06_JFIF.ico" />
+    <Resource Include="FileIcons\07_GIF.ico" />
+    <Resource Include="FileIcons\08_TIF.ico" />
+    <Resource Include="FileIcons\09_TIFF.ico" />
+    <Resource Include="FileIcons\10_PNG.ico" />
+    <Resource Include="FileIcons\11_ICO.ico" />
+    <Resource Include="FileIcons\12_WDP.ico" />
+    <Resource Include="FileIcons\13_WEBP.ico" />
+    <Resource Include="FileIcons\14_UnknownType.ico" />
   </ItemGroup>
 
 </Project>

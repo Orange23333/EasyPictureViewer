@@ -23,12 +23,12 @@ namespace EasyPictureViewer
         private double xOffset = 0;
         private double yOffset = 0;
 
-        private void SetImageCenter(double x, double y)
+        private void SetImageCenter(double xOff, double yOff, double angle)
         {
-            imageRotateTransform.CenterX = x;
-            imageRotateTransform.CenterY = y;
-            imageScaleTransform.CenterX = x;
-            imageScaleTransform.CenterY = y;
+            imageRotateTransform.CenterX = xOff;
+            imageRotateTransform.CenterY = yOff;
+            imageScaleTransform.CenterX = 0;
+            imageScaleTransform.CenterY = 0;
         }
 
         private void canvas_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -37,7 +37,7 @@ namespace EasyPictureViewer
             //计算画布中心
             double cwm = canvas.ActualWidth / 2;
             double chm = canvas.ActualHeight / 2;
-            SetImageCenter(cwm, chm);
+            SetImageCenter(cwm, chm, imageRotateTransform.Angle);
 
             //计算正常图片放置到中心
             x += xOffset;

@@ -21,10 +21,11 @@ namespace EasyPictureViewer
     public partial class MainWindow : Window
     {
         private double scaling = 1;
+        //private string scalingTextBox_TextBefore = "100";//Need to delete
 
         private void scalingTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            float value = GetScalingValue();
+            double value = GetScalingValue();
 
             if (value == -1)
             {
@@ -36,7 +37,7 @@ namespace EasyPictureViewer
 
         private void scalingTextBox_MouseWheel(object sender, MouseWheelEventArgs e)
         {
-            float value = GetScalingValue();
+            double value = GetScalingValue();
 
             if (value == -1)
             {
@@ -48,13 +49,13 @@ namespace EasyPictureViewer
             ChangeScaling(value);
         }
 
-        private float GetScalingValue()
+        private double GetScalingValue()
         {
-            float value = 100;
+            double value = 100;
 
             try
             {
-                value = float.Parse(string.Format("{0:F1}", float.Parse(scalingTextBox.Text)));
+                value = double.Parse(string.Format("{0:F1}", double.Parse(scalingTextBox.Text)));
             }
             catch (Exception)
             {
@@ -64,33 +65,33 @@ namespace EasyPictureViewer
                 }
                 else
                 {
-                    value = float.Parse(string.Format("{0:F1}", float.Parse(scalingTextBox_TextBefore)));
+                    value = double.Parse(string.Format("{0:F1}", scaling*100));
                 }
             }
             return value;
         }
 
-        private void ChangeScaling(float value)
+        private void ChangeScaling(double value)
         {
             if (value < 0)
             {
                 value = 0;
             }
-            else if (value > 30000)
+            else if (value > 10000)
             {
-                value = 30000;
+                value = 10000;
             }
-            scalingTextBox_TextBefore = String.Format("{0:F0}", value);
-            scalingTextBox.Text = scalingTextBox_TextBefore;
+            scaling = value / 100;
+            scalingTextBox.Text = String.Format("{0:F1}", scaling * 100);
 
-            if (value == 0)
+            if (scaling == 0)
             {
                 image.Visibility = Visibility.Hidden;
             }
             else
             {
-                imageScaleTransform.ScaleX = value / 100;
-                imageScaleTransform.ScaleY = value / 100;
+                imageScaleTransform.ScaleX = scaling;
+                imageScaleTransform.ScaleY = scaling;
                 image.Visibility = Visibility.Visible;
             }
         }
