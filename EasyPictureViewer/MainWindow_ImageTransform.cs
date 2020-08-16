@@ -20,28 +20,41 @@ namespace EasyPictureViewer
 {
     public partial class MainWindow : Window
     {
-        private double xOffset = 0;
-        private double yOffset = 0;
-
-        private void SetImageCenter(double xOff, double yOff, double angle)
-        {
-            imageRotateTransform.CenterX = xOff;
-            imageRotateTransform.CenterY = yOff;
-            imageScaleTransform.CenterX = 0;
-            imageScaleTransform.CenterY = 0;
-        }
-
         private void canvas_SizeChanged(object sender, SizeChangedEventArgs e)
         {
+            
+        }
+
+        public void RecalculateImageLayout()
+        {
             double x = 0, y = 0;
+
+            //计算image实际显示水平和垂直长度
+            double iaw, iah;
+            if (imageRotateTransform.Angle % 180 == 0)
+            {
+                //0度或180度旋转
+                iaw = image.ActualWidth;
+                iah = image.ActualHeight;
+            }
+            else
+            {
+                //90度或270度旋转
+                iah = image.ActualWidth;
+                iaw = image.ActualHeight;
+            }
+
             //计算画布中心
             double cwm = canvas.ActualWidth / 2;
             double chm = canvas.ActualHeight / 2;
-            SetImageCenter(cwm, chm, imageRotateTransform.Angle);
+
+            imageRotateTransform.CenterX = cwm;
+            imageRotateTransform.CenterY = chm;
+            imageScaleTransform.CenterX = cwm;
+            imageScaleTransform.CenterY = chm;
 
             //计算正常图片放置到中心
-            x += xOffset;
-            y += yOffset;
+
         }
     }
 }

@@ -186,6 +186,8 @@ namespace EasyPictureViewer
         {
             try
             {
+                用画布的方式缓存图片，而不是打开文件，以避免占用。
+
                 //加载图片
                 image.Source = new BitmapImage(new Uri(Uri.EscapeUriString(System.IO.Path.Combine(nowDirectory, path).Replace('\\', '/')), UriKind.RelativeOrAbsolute));
             }
@@ -204,7 +206,7 @@ namespace EasyPictureViewer
             //更新image的布局
             image.UpdateLayout();
             //重置image的中心
-            SetImageCenter(image.ActualWidth / 2, image.ActualHeight / 2, 0);
+            RecalculateImageLayout();
         }
     }
 }
